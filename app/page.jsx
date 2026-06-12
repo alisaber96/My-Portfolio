@@ -63,7 +63,7 @@ const PROJECTS = [
     tech:        ['Python', 'TensorFlow', 'MNE-Python', 'CNN', 'Raspberry Pi 4'],
     github:      '#',
     demo:        null,
-    video:       '/videos/vid1.mov',
+    video:       null,
   },
   {
     id:          2,
@@ -73,7 +73,7 @@ const PROJECTS = [
     tech:        ['MATLAB', 'Signal Processing', 'Array Processing', 'MIMO'],
     github:      '#',
     demo:        null,
-    video:       '/videos/vid2.mov',
+    video:       null,
   },
   {
     id:          3,
@@ -83,7 +83,7 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'Xilinx Vivado', 'AXI-Stream', 'RTL Design', 'SPI'],
     github:      '#',
     demo:        null,
-    video:       '/videos/vid3.mov',
+    video:       null,
   },
   {
     id:          4,
@@ -93,7 +93,7 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'PyTorch', 'Hardware Quantisation', 'Systolic Array'],
     github:      '#',
     demo:        null,
-    video:       '/videos/vid4.mov',
+    video:       null,
   },
 ];
 
