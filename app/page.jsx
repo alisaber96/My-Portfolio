@@ -296,12 +296,11 @@ function HeroSection() {
          //     <svg viewBox="0 0 80 80" className="w-20 h-20 text-signal/40" fill="currentColor">
          //       <circle cx="40" cy="28" r="14"/>
          //       <path d="M10 72 C10 52 70 52 70 72" />
-              <svg <img
+              <img
                 src="/profile.jpg"
                 alt="Ali Saber"
                 className="object-cover w-full h-full"
                 />
-	      </svg>
             </div>
           </div>
           <div className="flex flex-col gap-3">
