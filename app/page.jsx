@@ -62,7 +62,7 @@ const PROJECTS = [
     tech:        ['Python', 'TensorFlow', 'MNE-Python', 'CNN', 'Raspberry Pi 4'],
     github:      '#',   // ← replace with your GitHub URL, or set to null to hide
     demo:        null,  // ← replace with a live demo URL, or leave null
-    video:       null,  // ← set to '/videos/proj1.mp4' after adding to /public
+    video:       '/videos/vid1.mov',  // ← set to '/videos/proj1.mp4' after adding to /public
   },
   {
     id:          2,
@@ -72,7 +72,7 @@ const PROJECTS = [
     tech:        ['MATLAB', 'Signal Processing', 'Array Processing', 'MIMO'],
     github:      '#',
     demo:        null,
-    video:       null,
+    video:       '/videos/vid2.mov',
   },
   {
     id:          3,
@@ -82,7 +82,7 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'Xilinx Vivado', 'AXI-Stream', 'RTL Design', 'SPI'],
     github:      '#',
     demo:        null,
-    video:       null,
+    video:       '/videos/vid3.mov',
   },
   {
     id:          4,
@@ -92,7 +92,7 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'PyTorch', 'Hardware Quantisation', 'Systolic Array'],
     github:      '#',
     demo:        null,
-    video:       null,
+    video:       '/videos/vid4.mov',
   },
 ];
 
@@ -293,10 +293,15 @@ function HeroSection() {
           <div className="flex-shrink-0">
             <div className="w-36 h-36 rounded-2xl bg-blueprint border-2 border-signal/20
                             flex items-center justify-center overflow-hidden">
-              <svg viewBox="0 0 80 80" className="w-20 h-20 text-signal/40" fill="currentColor">
-                <circle cx="40" cy="28" r="14"/>
-                <path d="M10 72 C10 52 70 52 70 72" />
-              </svg>
+         //     <svg viewBox="0 0 80 80" className="w-20 h-20 text-signal/40" fill="currentColor">
+         //       <circle cx="40" cy="28" r="14"/>
+         //       <path d="M10 72 C10 52 70 52 70 72" />
+              <svg <img
+                src="/profile.jpg"
+                alt="Ali Saber"
+                className="object-cover w-full h-full"
+                />
+	      </svg>
             </div>
           </div>
           <div className="flex flex-col gap-3">
