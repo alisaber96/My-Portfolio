@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { label: 'Home',     id: 'home',     type: 'scroll' },
   { label: 'CV',       href: '/cv',    type: 'link'   },
   { label: 'Projects', id: 'projects', type: 'scroll' },
+  { label: 'Skills',   id: 'skills',   type: 'scroll' },
   { label: 'Contact',  id: 'contact',  type: 'scroll' },
 ];
 
