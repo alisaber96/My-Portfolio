@@ -43,7 +43,7 @@ const PUBLICATIONS = [
     venue:   'IEEE International Conference on Signal Processing, 2023',
     link:    '#',
     img:     null,
-  },
+  }, 
   {
     id: 3,
     title:   'Low-Power VLSI Architecture for Real-Time FFT in Embedded Signal Processors',
