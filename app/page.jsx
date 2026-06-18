@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import {
   Mail, MapPin, ExternalLink, BookOpen,
   Play, Pause, Volume2, VolumeX,
-  ChevronDown, ChevronUp,
+  ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
   Linkedin, Send, Github,
 } from 'lucide-react';
 
@@ -19,7 +19,8 @@ const PROFILE = {
   location:    'Shiraz, Fars, Iran',
   scholarUrl:  'https://scholar.google.com/citations?user=x3XHBCcAAAAJ&hl=en',
   telegramUrl: 'https://t.me/Malisaber',
-  linkedinUrl: 'https://www.linkedin.com/in/ali-saber/',
+  linkedinUrl: 'https://www.linkedin.com/in/malisaber/',
+  githubUrl:   'https://github.com/malisaber',
   address:     'Shiraz, Fars, Iran',
   bio: `Ali Saber holds a B.Sc. degree in Electrical Engineering and 
   an M.Sc. degree in Electrical and Electronics Engineering with a specialization in Digital Systems. 
@@ -38,7 +39,7 @@ const PUBLICATIONS = [
     authors: 'Tahereh Vasei, Mohamad Ali Saber, Alireza Nahvy, and Zainalabedin Navabi',
     venue:   'IET Computers & Digital Techniques, 2024',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:9yKSN-GCB0IC',
-    img:     'BCI.jpg',
+    img:     'images/BCI.jpg',
   },
   {
     id: 2,
@@ -46,7 +47,7 @@ const PUBLICATIONS = [
     authors: 'Rezgar Sadeghi, Ehsan Akbari, Mohamad Ali Saber',
     venue:   'IEEE European Test Symposium (ETS), 2022',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:u5HHmVD_uO8C',
-    img:     'OCT.jpg',
+    img:     'images/OCT.jpg',
   },
   {
     id: 3,
@@ -54,7 +55,7 @@ const PUBLICATIONS = [
     authors: 'Mahboobe Sadeghipour Roodsari, Mohamad Ali Saber, Zainalabedin Navabi',
     venue:   '23rd International Symposium on Design and Diagnostics of Electronic Circuits & Systems (DDECS), 2020',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:u-x6o8ySG0sC',
-    img:     'DIBA.jpg',
+    img:     'images/DIBA.jpg',
   },
   {
     id: 4,
@@ -62,7 +63,7 @@ const PUBLICATIONS = [
     authors: 'Mohamad Ali Saber, Zainalabedin Navabi',
     venue:   'Under review, 2026',
     link:    '#',
-    img:     'mine.png',
+    img:     'images/mine.png',
   },
 ];
 
@@ -75,7 +76,14 @@ const PROJECTS = [
     tech:        ['Python', 'TensorFlow', 'MNE-Python', 'CNN', 'Raspberry Pi 4'],
     github:      '#',
     demo:        null,
-    video:       'videos/vid1.mov',
+    slideshowInterval: 3000, // ms between slides (only applies to images)
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/DIBA.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'image', src: '/images/OCT.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+    ],
   },
   {
     id:          2,
@@ -85,7 +93,14 @@ const PROJECTS = [
     tech:        ['MATLAB', 'Signal Processing', 'Array Processing', 'MIMO'],
     github:      '#',
     demo:        null,
-    video:       'videos/vid1.mov',
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/DIBA.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'image', src: '/images/OCT.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+    ],
   },
   {
     id:          3,
@@ -95,7 +110,14 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'Xilinx Vivado', 'AXI-Stream', 'RTL Design', 'SPI'],
     github:      '#',
     demo:        null,
-    video:       'videos/vid1.mov',
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/DIBA.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'image', src: '/images/OCT.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+    ],
   },
   {
     id:          4,
@@ -105,7 +127,14 @@ const PROJECTS = [
     tech:        ['SystemVerilog', 'PyTorch', 'Hardware Quantisation', 'Systolic Array'],
     github:      '#',
     demo:        null,
-    video:       'videos/vid1.mov',
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/DIBA.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'image', src: '/images/OCT.jpg' },
+		{ type: 'video', src: '/videos/vid1.mp4' },
+    ],
   },
 ];
 
@@ -142,38 +171,77 @@ function SectionHeading({ children }) {
 }
 
 // ─── Project card ─────────────────────────────────────────────────────────────
-// The <video> element lives in ONE fixed position in the JSX tree so React
-// never unmounts/remounts it — refs, event listeners and playback state all
-// stay alive across expand / collapse.
 
 function ProjectCard({ proj, isExpanded, onToggle }) {
-  const videoRef = useRef(null);
-  const didMount = useRef(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted,   setIsMuted]   = useState(false);
-  const [progress,  setProgress]  = useState(0);
+  const videoRef  = useRef(null);
+  const didMount  = useRef(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying,    setIsPlaying]    = useState(false);
+  const [isMuted,      setIsMuted]      = useState(false);
+  const [progress,     setProgress]     = useState(0);
+  const [isHovering,   setIsHovering]   = useState(false);
 
-  // Attach play / pause / timeupdate listeners once
+  const media   = proj.media ?? [];
+  const total   = media.length;
+  const current = media[currentIndex] ?? null;
+  const isVideo = current?.type === 'video';
+
+  const goPrev = () => setCurrentIndex(i => (i - 1 + total) % total);
+  const goNext = () => setCurrentIndex(i => (i + 1) % total);
+
+  // Reset progress when slide changes
+  useEffect(() => {
+    setIsPlaying(false);
+    setProgress(0);
+  }, [currentIndex]);
+
+  // Attach video event listeners whenever we land on a video slide
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || !proj.video) return;
+    if (!v || !isVideo) return;
     const onPlay       = () => setIsPlaying(true);
     const onPause      = () => setIsPlaying(false);
     const onTimeUpdate = () => { if (v.duration) setProgress(v.currentTime / v.duration); };
+    const onEnded      = () => { if (total > 1) setCurrentIndex(i => (i + 1) % total); };
     v.addEventListener('play',       onPlay);
     v.addEventListener('pause',      onPause);
     v.addEventListener('timeupdate', onTimeUpdate);
+    v.addEventListener('ended',      onEnded);
     return () => {
       v.removeEventListener('play',       onPlay);
       v.removeEventListener('pause',      onPause);
       v.removeEventListener('timeupdate', onTimeUpdate);
+      v.removeEventListener('ended',      onEnded);
     };
-  }, [proj.video]);
+  }, [currentIndex, isVideo, total]);
 
-  // Expand → unmute + play with sound; collapse → pause (keep position)
+  // Auto-play video when we land on a video slide (if card is active)
+  useEffect(() => {
+    if (!videoRef.current || !isVideo) return;
+    if (isHovering || isExpanded) {
+      videoRef.current.muted = !isExpanded;
+      setIsMuted(!isExpanded);
+      videoRef.current.play().catch(() => {
+        videoRef.current.muted = true;
+        setIsMuted(true);
+        videoRef.current.play().catch(() => {});
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex]);
+
+  // Auto-advance images on a timer
+  useEffect(() => {
+    if (total <= 1 || isVideo) return;
+    const ms = proj.slideshowInterval ?? 3000;
+    const id = setInterval(() => setCurrentIndex(i => (i + 1) % total), ms);
+    return () => clearInterval(id);
+  }, [currentIndex, isVideo, total, proj.slideshowInterval]);
+
+  // Expand → unmute + play; collapse → pause
   useEffect(() => {
     if (!didMount.current) { didMount.current = true; return; }
-    if (!videoRef.current || !proj.video) return;
+    if (!videoRef.current || !isVideo) return;
     if (isExpanded) {
       videoRef.current.muted = false;
       setIsMuted(false);
@@ -181,21 +249,20 @@ function ProjectCard({ proj, isExpanded, onToggle }) {
     } else {
       videoRef.current.pause();
     }
-  }, [isExpanded, proj.video]);
+  }, [isExpanded, isVideo]);
 
-  // Hover: try with sound, fall back to muted only if browser blocks it
   const handleMouseEnter = () => {
-    if (!videoRef.current || !proj.video || isExpanded) return;
+    setIsHovering(true);
+    if (!videoRef.current || !isVideo || isExpanded) return;
     videoRef.current.muted = false;
     videoRef.current.play().catch(() => {
-      // Browser blocked unmuted autoplay (requires a user interaction first)
-      // Retry muted — after any click on the page, sound will work on next hover
       videoRef.current.muted = true;
       videoRef.current.play().catch(() => {});
     });
   };
   const handleMouseLeave = () => {
-    if (!videoRef.current || !proj.video || isExpanded) return;
+    setIsHovering(false);
+    if (!videoRef.current || !isVideo || isExpanded) return;
     videoRef.current.pause();
   };
 
@@ -222,17 +289,33 @@ function ProjectCard({ proj, isExpanded, onToggle }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Outer flex changes direction on expand — video always stays first child */}
       <div className={`flex ${isExpanded ? 'flex-col md:flex-row' : 'flex-col'}`}>
 
-        {/* ── Video area — NEVER moves in the tree ── */}
+        {/* ── Media area ── */}
         <div className={`relative flex-shrink-0 bg-blueprint flex items-center justify-center overflow-hidden
           ${isExpanded ? 'aspect-video md:aspect-auto md:w-[42%]' : 'aspect-video'}`}>
 
-          {proj.video ? (
-            <video ref={videoRef} src={proj.video}
-                   className="w-full h-full object-cover" loop playsInline />
+          {/* Current slide */}
+          {isVideo ? (
+            <video
+              key={current.src}
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              loop={total === 1}
+              playsInline
+              preload="metadata"
+            >
+              <source src={current.src} type="video/mp4" />
+            </video>
+          ) : current?.type === 'image' ? (
+            <img
+              key={current.src}
+              src={current.src}
+              alt={`${proj.title} — slide ${currentIndex + 1}`}
+              className="w-full h-full object-cover"
+            />
           ) : (
+            /* empty placeholder */
             <>
               <div className="absolute inset-0" style={{
                 backgroundImage:
@@ -247,40 +330,87 @@ function ProjectCard({ proj, isExpanded, onToggle }) {
             </>
           )}
 
-          {/* Controls overlay */}
-          {proj.video && (
+          {/* Prev / Next arrows */}
+          {total > 1 && (
+            <>
+              <button onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 z-20
+                                 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60
+                                 text-white flex items-center justify-center transition-colors"
+                      aria-label="Previous slide">
+                <ChevronLeft size={14} />
+              </button>
+              <button onClick={(e) => { e.stopPropagation(); goNext(); }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 z-20
+                                 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60
+                                 text-white flex items-center justify-center transition-colors"
+                      aria-label="Next slide">
+                <ChevronRight size={14} />
+              </button>
+            </>
+          )}
+
+          {/* Bottom controls bar (always shown if there's any media or dots) */}
+          {(total > 0) && (
             <div className="absolute bottom-0 left-0 right-0 z-10
                             bg-gradient-to-t from-black/70 to-transparent pt-6">
               <div className="flex items-center gap-2 px-3 pb-2">
-                <button onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-                        className="flex-shrink-0 p-1.5 rounded-full bg-white/20
-                                   hover:bg-white/35 text-white transition-colors"
-                        aria-label={isPlaying ? 'Pause' : 'Play'}>
-                  {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-                </button>
 
-                <div className="group/bar flex-1 relative flex items-center h-5 cursor-pointer"
-                     onClick={(e) => {
-                       e.stopPropagation();
-                       const r = e.currentTarget.getBoundingClientRect();
-                       handleSeek(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)));
-                     }}>
-                  <div className="w-full h-[3px] bg-white/30 rounded-full overflow-hidden">
-                    <div className="h-full bg-white rounded-full"
-                         style={{ width: `${progress * 100}%` }} />
+                {/* Play/Pause — video only */}
+                {isVideo && (
+                  <button onClick={(e) => { e.stopPropagation(); togglePlay(); }}
+                          className="flex-shrink-0 p-1.5 rounded-full bg-white/20
+                                     hover:bg-white/35 text-white transition-colors"
+                          aria-label={isPlaying ? 'Pause' : 'Play'}>
+                    {isPlaying ? <Pause size={14} /> : <Play size={14} />}
+                  </button>
+                )}
+
+                {/* Progress bar — video only */}
+                {isVideo && (
+                  <div className="group/bar flex-1 relative flex items-center h-5 cursor-pointer"
+                       onClick={(e) => {
+                         e.stopPropagation();
+                         const r = e.currentTarget.getBoundingClientRect();
+                         handleSeek(Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)));
+                       }}>
+                    <div className="w-full h-[3px] bg-white/30 rounded-full overflow-hidden">
+                      <div className="h-full bg-white rounded-full"
+                           style={{ width: `${progress * 100}%` }} />
+                    </div>
+                    <div className="absolute top-1/2 w-3 h-3 bg-white rounded-full shadow
+                                    -translate-y-1/2 -translate-x-1/2 pointer-events-none
+                                    opacity-0 group-hover/bar:opacity-100 transition-opacity"
+                         style={{ left: `${progress * 100}%` }} />
                   </div>
-                  <div className="absolute top-1/2 w-3 h-3 bg-white rounded-full shadow
-                                  -translate-y-1/2 -translate-x-1/2 pointer-events-none
-                                  opacity-0 group-hover/bar:opacity-100 transition-opacity"
-                       style={{ left: `${progress * 100}%` }} />
-                </div>
+                )}
 
-                <button onClick={(e) => { e.stopPropagation(); toggleMute(); }}
-                        className="flex-shrink-0 p-1.5 rounded-full bg-white/20
-                                   hover:bg-white/35 text-white transition-colors"
-                        aria-label={isMuted ? 'Unmute' : 'Mute'}>
-                  {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-                </button>
+                {/* Dot indicators */}
+                {total > 1 && (
+                  <div className={`flex items-center gap-1.5
+                    ${!isVideo ? 'flex-1 justify-center' : ''}`}>
+                    {media.map((_, i) => (
+                      <button key={i}
+                              onClick={(e) => { e.stopPropagation(); setCurrentIndex(i); }}
+                              className={`rounded-full transition-all duration-200 ${
+                                i === currentIndex
+                                  ? 'w-4 h-[6px] bg-white'
+                                  : 'w-[6px] h-[6px] bg-white/50 hover:bg-white/80'
+                              }`}
+                              aria-label={`Go to slide ${i + 1}`} />
+                    ))}
+                  </div>
+                )}
+
+                {/* Mute — video only */}
+                {isVideo && (
+                  <button onClick={(e) => { e.stopPropagation(); toggleMute(); }}
+                          className="flex-shrink-0 p-1.5 rounded-full bg-white/20
+                                     hover:bg-white/35 text-white transition-colors"
+                          aria-label={isMuted ? 'Unmute' : 'Mute'}>
+                    {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -363,7 +493,7 @@ function HeroSection() {
             <div className="w-36 h-36 rounded-2xl bg-blueprint border-2 border-signal/20
                             flex items-center justify-center overflow-hidden">
               <img
-                src="/profile.jpg"
+                src="/images/profile.jpg"
                 alt="Ali Saber"
                 className="object-cover w-full h-full"
               />
@@ -391,6 +521,11 @@ function HeroSection() {
                  className="inline-flex items-center gap-2 text-slate-mid text-sm hover:text-signal transition-colors group">
                 <ExternalLink size={15} className="text-signal flex-shrink-0" />
                 <span className="group-hover:underline underline-offset-2">Google Scholar</span>
+              </a>
+              <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 text-slate-mid text-sm hover:text-signal transition-colors group">
+                <Github size={15} className="text-signal flex-shrink-0" />
+                <span className="group-hover:underline underline-offset-2">GitHub</span>
               </a>
             </div>
           </div>
@@ -475,12 +610,23 @@ function ProjectsSection() {
   const [expandedId, setExpandedId] = useState(null);
   const toggle = (id) => setExpandedId((prev) => (prev === id ? null : id));
 
+  // If the expanded card sits in the right column (odd index), swap it with its
+  // left sibling so md:col-span-2 always starts at column 1 — no row-jumping.
+  const displayProjects = (() => {
+    if (!expandedId) return PROJECTS;
+    const idx = PROJECTS.findIndex(p => p.id === expandedId);
+    if (idx < 0 || idx % 2 === 0) return PROJECTS;   // left-column: no swap needed
+    const arr = [...PROJECTS];
+    [arr[idx - 1], arr[idx]] = [arr[idx], arr[idx - 1]];
+    return arr;
+  })();
+
   return (
     <section id="projects" className="py-16 bg-lab">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeading>Projects</SectionHeading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {PROJECTS.map((proj) => (
+          {displayProjects.map((proj) => (
             <ProjectCard
               key={proj.id}
               proj={proj}

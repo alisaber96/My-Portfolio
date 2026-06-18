@@ -1,0 +1,32 @@
+[build]
+  command   = "npm run build"
+  publish   = "out"
+
+# PDFs — serve inline so the browser can display them (not force download)
+[[headers]]
+  for = "/docs/*.pdf"
+  [headers.values]
+    Content-Type        = "application/pdf"
+    Content-Disposition = "inline"
+
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Content-Type        = "application/pdf"
+    Content-Disposition = "inline"
+
+# Correct MIME types for video files so browsers stream instead of download
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Content-Type = "video/mp4"
+
+[[headers]]
+  for = "/videos/*"
+  [headers.values]
+    Content-Type = "video/mp4"
+
+[[headers]]
+  for = "/*.webm"
+  [headers.values]
+    Content-Type = "video/webm"
