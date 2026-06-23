@@ -10,7 +10,7 @@ import {
 // ─── Replace placeholder data with your real content ─────────────────────────
 
 const PROFILE = {
-  name:        'M. Ali Saber',
+  name:        'Ali Saber',
   degree:      "Master's Degree in EEE, specializing in Digital Systems",
   university:  'Tehran University',
   gradYear:    '2023',
@@ -22,15 +22,25 @@ const PROFILE = {
   linkedinUrl: 'https://www.linkedin.com/in/malisaber/',
   githubUrl:   'https://github.com/malisaber',
   address:     'Shiraz, Fars, Iran',
-  bio: `Ali Saber holds a B.Sc. degree in Electrical Engineering and 
-  an M.Sc. degree in Electrical and Electronics Engineering with a specialization in Digital Systems. 
-  His research interests include computer architecture, hardware acceleration, near-memory computing, 
+  bio: `Ali Saber holds a B.Sc. degree in Electrical Engineering and
+  an M.Sc. degree in Electrical and Electronics Engineering with a specialization in Digital Systems.
+  His research interests include computer architecture, hardware acceleration, near-memory computing,
   embedded systems, signal processing, and machine learning. His master's research focused on proposing
-  and implementing a near-memory processing system and developing efficient communication mechanisms 
-  between host processors and off-chip 3D memory. 
-  He is currently interested in pursuing Ph.D. studies in machine learning, artificial intelligence, 
+  and implementing a near-memory processing system and developing efficient communication mechanisms
+  between host processors and off-chip 3D memory.
+  He is currently interested in pursuing Ph.D. studies in machine learning, artificial intelligence,
   computer architecture, near-memory and in-memory computing, high-performance computing, and quantum computing.`,
 };
+
+
+const ABOUT = {
+	area1:		'Machine Learning',
+	area2:		'Embodied AI',
+	area3:		'Computer Architecture',
+	about:		'Electrical and Electronics Engineering researcher focused on Machine Learning, Computer Architecture, Hardware Acceleration, and Signal Processing.'
+}
+
+
 
 const PUBLICATIONS = [
   {
@@ -39,7 +49,7 @@ const PUBLICATIONS = [
     authors: 'Tahereh Vasei, Mohamad Ali Saber, Alireza Nahvy, and Zainalabedin Navabi',
     venue:   'IET Computers & Digital Techniques, 2024',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:9yKSN-GCB0IC',
-    img:     'images/BCI.jpg',
+    img:     'images/publications/BCI.jpg',
   },
   {
     id: 2,
@@ -47,7 +57,7 @@ const PUBLICATIONS = [
     authors: 'Rezgar Sadeghi, Ehsan Akbari, Mohamad Ali Saber',
     venue:   'IEEE European Test Symposium (ETS), 2022',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:u5HHmVD_uO8C',
-    img:     'images/OCT.jpg',
+    img:     'images/publications/OCT.jpg',
   },
   {
     id: 3,
@@ -55,7 +65,7 @@ const PUBLICATIONS = [
     authors: 'Mahboobe Sadeghipour Roodsari, Mohamad Ali Saber, Zainalabedin Navabi',
     venue:   '23rd International Symposium on Design and Diagnostics of Electronic Circuits & Systems (DDECS), 2020',
     link:    'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=x3XHBCcAAAAJ&citation_for_view=x3XHBCcAAAAJ:u-x6o8ySG0sC',
-    img:     'images/DIBA.jpg',
+    img:     'images/publications/DIBA.jpg',
   },
   {
     id: 4,
@@ -63,77 +73,170 @@ const PUBLICATIONS = [
     authors: 'Mohamad Ali Saber, Zainalabedin Navabi',
     venue:   'Under review, 2026',
     link:    '#',
-    img:     'images/mine.png',
+    img:     'images/publications/mine.png',
   },
 ];
 
 const PROJECTS = [
   {
     id:          1,
-    title:       'EEG-Based Brain–Computer Interface',
-    description: 'Real-time BCI system using CNN-based EEG classification. 94% accuracy on motor imagery tasks with <50 ms latency.',
-    details:     'Full pipeline from EEG acquisition to motor intent classification. Uses an 8-channel amplifier with bandpass filtering (8–30 Hz) and common spatial patterns before a 4-layer CNN. Verified on 10 subjects and deployed on embedded hardware for real-time use.',
-    tech:        ['Python', 'TensorFlow', 'MNE-Python', 'CNN', 'Raspberry Pi 4'],
-    github:      '#',
+    title:       'Physics-Based Lunar Lander with Deep Q-Learning',
+    description: 'A C++ reinforcement-learning sandbox that combines real-time physics, rendering, and Dueling DQN training.',
+    details:     'This project integrates environment simulation, graphical rendering, and agent training into one experimental platform for sequential decision-making. By combining physics-based dynamics with a learned policy and replay-buffer training, it becomes a strong example of embodied AI in a controlled 2-D setting.',
+    tech:        ['C++', 'SFML', 'Bullet Physics', 'OpenCV', 'LibTorch', 'OpenGL'],
+    github:      'https://github.com/malisaber/RL-Agent-Playing-LunarLander-Game',
     demo:        null,
     slideshowInterval: 3000, // ms between slides (only applies to images)
     media: [
 		// Add images and/or videos here, e.g.:
-		{ type: 'image', src: '/images/DIBA.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
-		{ type: 'image', src: '/images/OCT.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'video', src: '/videos/LunarLander/vid1.mp4' },
+		{ type: 'image', src: '/images/LunarLander/im1.png' },
+		{ type: 'video', src: '/videos/LunarLander/vid2.mp4' },
+		{ type: 'image', src: '/images/LunarLander/im1.png' },
+		{ type: 'video', src: '/videos/LunarLander/vid3.mp4' },
+		{ type: 'image', src: '/images/LunarLander/im1.png' },
     ],
   },
   {
     id:          2,
-    title:       'MIMO Radar Adaptive Beamformer',
-    description: 'MATLAB simulation of wideband adaptive beamforming for MIMO radar in clutter environments.',
-    details:     'Implements and benchmarks five adaptive beamforming algorithms (MVDR, LCMV, GSC, SMI, DL-SMI) on a 12-element virtual array. Evaluated under simulated terrain clutter at 5–30 dB CNR, with SINR and beam-pattern analysis.',
-    tech:        ['MATLAB', 'Signal Processing', 'Array Processing', 'MIMO'],
-    github:      '#',
+    title:       'Progression from Tabular RL to Deep RL in GridWorld',
+    description: 'A MATLAB project that compares Monte Carlo methods, temporal-difference learning, and DQN on a compact delivery environment.',
+    details:     'This project presents reinforcement learning as a staged methodological progression rather than a single algorithm demo. It reuses the same GridWorld task to compare tabular control, multi-step updates, and deep function approximation, which makes the learning dynamics easy to study and explain.',
+    tech:        ['MATLAB', 'Monte Carlo control', 'SARSA', 'Q-learning', 'DQN'],
+    github:      'https://github.com/malisaber/RL-Agent-Playing-Post-Delivery-Game',
     demo:        null,
     slideshowInterval: 3000,
     media: [
 		// Add images and/or videos here, e.g.:
-		{ type: 'image', src: '/images/DIBA.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
-		{ type: 'image', src: '/images/OCT.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'video', src: '/videos/Post/vid1.mp4' },
+		{ type: 'image', src: '/images/Post/im1.jpg' },
+		{ type: 'video', src: '/videos/Post/vid2.mp4' },
+		{ type: 'image', src: '/images/Post/im1.jpg' },
+		{ type: 'video', src: '/videos/Post/vid3.mp4' },
     ],
   },
   {
     id:          3,
-    title:       'FPGA Real-Time Signal Processor',
-    description: 'Xilinx Artix-7 implementation of a 1024-point FFT pipeline at 100 MHz, consuming 0.8 W.',
-    details:     'Radix-4 FFT engine written in SystemVerilog with AXI-Stream interface. Synthesised on Xilinx Artix-7 (XC7A35T). Achieves 100 MHz clock at 0.8 W and fits inside 4,200 LUTs. Interfaced with an external ADC via SPI for live signal capture.',
-    tech:        ['SystemVerilog', 'Xilinx Vivado', 'AXI-Stream', 'RTL Design', 'SPI'],
-    github:      '#',
+    title:       'DQN Agent for a Custom Bricks Environment',
+    description: 'A MATLAB reinforcement-learning project that trains a Deep Q-Network agent on a brick-stacking game.',
+    details:     'The project defines a custom environment and trains a DQN agent with replay and target-network updates, turning the game into a compact example of embodied intelligence and sequential decision-making. It is a practical demonstration of how environment design, reward structure, and policy learning interact in reinforcement learning.',
+    tech:        ['MATLAB', 'Deep Learning Toolbox', 'DQN', 'custom environment'],
+    github:      'https://github.com/malisaber/RL-Agent-Playing-Bricks-Game',
     demo:        null,
     slideshowInterval: 3000,
     media: [
 		// Add images and/or videos here, e.g.:
-		{ type: 'image', src: '/images/DIBA.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
-		{ type: 'image', src: '/images/OCT.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'video', src: '/videos/Bricks/vid1.mp4' },
+		{ type: 'image', src: '/images/Bricks/im1.png' },
+		{ type: 'video', src: '/videos/Bricks/vid2.mp4' },
+		{ type: 'image', src: '/images/Bricks/im1.png' },
     ],
   },
   {
     id:          4,
-    title:       'Neural Network Hardware Accelerator',
-    description: 'Systolic-array inference engine for MobileNet-V2 in SystemVerilog. 4× speedup over CPU at 200 mW.',
-    details:     'Systolic array designed in SystemVerilog for 8-bit quantised MobileNet-V2 inference. Verified against a PyTorch floating-point baseline. Post-synthesis timing analysis shows 4× throughput improvement over an ARM Cortex-A53 at 200 mW power draw.',
-    tech:        ['SystemVerilog', 'PyTorch', 'Hardware Quantisation', 'Systolic Array'],
-    github:      '#',
+    title:       'Self-Organizing Map and Competitive Learning Study',
+    description: 'A cleaned-up clustering and SOM project with MATLAB demos, a Python implementation, and a LaTeX report.',
+    details:     'This project documents unsupervised representation learning through implementation, visualization, and formal reporting. The combination of source code, generated figures, and a written report makes it feel like a small computational learning study rather than a simple coding exercise.',
+    tech:        [],
+    github:      'https://github.com/malisaber/Self-Organizing-Map',
     demo:        null,
     slideshowInterval: 3000,
     media: [
 		// Add images and/or videos here, e.g.:
-		{ type: 'image', src: '/images/DIBA.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
-		{ type: 'image', src: '/images/OCT.jpg' },
-		{ type: 'video', src: '/videos/vid1.mp4' },
+		{ type: 'video', src: '/videos/SOM/vid1.mp4' },
+		{ type: 'video', src: '/videos/SOM/vid2.mp4' },
+		{ type: 'video', src: '/videos/SOM/vid3.mp4' },
+		{ type: 'image', src: '/images/SOM/im1.png' },
+		{ type: 'image', src: '/images/SOM/im2.png' },
+		{ type: 'video', src: '/videos/SOM/vid3.mp4' },
+		{ type: 'image', src: '/images/SOM/im3.png' },
+		{ type: 'image', src: '/images/SOM/im4.png' },
+    ],
+  },
+  {
+    id:          5,
+    title:       'SystemC Processor Instruction Set Simulator Generator',
+    description: 'A C++/SystemC code generator that transforms a custom processor-description language into a structured simulator scaffold.',
+    details:     'This project automates the creation of repetitive infrastructure for instruction-set simulators by translating concise `.TP` specifications into SystemC-style source files. It reflects a software-engineering approach to architectural modeling, emphasizing abstraction, reproducibility, and reduced manual boilerplate.',
+    tech:        ['SystemC', 'ISS'],
+    github:      'https://github.com/malisaber/ISS-Generator',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/ISSGEN/im1.png' },
+    ],
+  },
+  {
+    id:          6,
+    title:       'SystemC Instruction-Set Simulator for PUNEH',
+    description: 'A 16-bit processor simulator built in SystemC with bus modeling, memory, peripherals, and interrupt support.',
+    details:     'The project models a complete processor environment, including the CPU core, register file, shared bus abstraction, memory subsystem, UART/USART behavior, and interrupt mechanisms. With a demo program running in simulation, it becomes a strong example of instruction-set simulation and architectural experimentation.',
+    tech:        ['C++', 'SystemC', 'TLM', 'peripheral modeling'],
+    github:      'https://github.com/malisaber/ISS-PUNEH-Core',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/PUNEH/im1.jpg' },
+    ],
+  },
+  {
+    id:          7,
+    title:       'Pipelined AVR Core',
+    description: 'A Verilog implementation of the AVR core, mimicing AVR behavior in fetch, decode, execute, memory, and write-back stages.',
+    details:     'This design studies the architectural consequences of pipelining, including stage separation, control coordination, interrupt handling, and memory arbitration. It is especially useful as a teaching and exploration artifact because it moves from basic CPU organization toward more performance-oriented microarchitecture.',
+    tech:        ['Verilog', 'pipeline architecture', 'simulation', 'FPGA-oriented design'],
+    github:      'https://github.com/malisaber/Pipelined-AVR-Core',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/Pipelined/im1.png' },
+    ],
+  },
+  {
+    id:          8,
+    title:       '8085 Processor Core',
+    description: 'An RTL VHDL implementation of an Intel 8085 microprocessor with cycle-accurate control, datapath logic, and interrupt handling.',
+    details:     'This work reconstructs a classic 8-bit processor at the register-transfer level, integrating instruction sequencing, arithmetic and logic operations, flag management, and an external bus interface into a coherent CPU. The design is paired with simulation and synthesis support, so it reads as both a digital-systems implementation and a study in processor microarchitecture.',
+    tech:        ['VHDL', 'RTL design', 'digital simulation', 'synthesis'],
+    github:      'https://github.com/malisaber/8085-Core',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/8085/im1.jpg' },
+		{ type: 'image', src: '/images/8085/im2.jpg' },
+		{ type: 'image', src: '/images/8085/im3.jpg' },
+    ],
+  },
+  {
+    id:          9,
+    title:       'Multicycle Processor Implementations',
+    description: 'Several HDL-based processor designs that examine multicycle datapath organization across AVR-style and MIPS-style instruction sets.',
+    details:     'These projects study how instruction execution can be decomposed into fetch, decode, execute, memory, and write-back phases under explicit control sequencing. The AVR-oriented implementation couples Verilog hardware with MATLAB tooling for assembler output and control-memory generation, while the MIPS-oriented implementation presents a conventional multicycle datapath in SystemVerilog. Together they offer a comparative view of processor microarchitecture, control design, and simulation-driven validation.',
+    tech:        ['Verilog', 'MATLAB', 'FPGA design', 'control logic', 'Hardware-software codesign'],
+    github:      'https://github.com/malisaber?tab=repositories&q=multicycle&type=&language=&sort=',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/MultiCycle/im1.png' },
+    ],
+  },
+  {
+    id:          10,
+    title:       'Single-Cycle Processor Implementations',
+    description: 'A pair of compact processor designs centered on single-cycle execution and related control-path organization.',
+    details:     'These repositories focus on reduced-instruction-set processors intended to make the relationship between instruction fetch, combinational execution, and register updates transparent. The MIPS design follows the canonical single-cycle datapath, while the RISC-V implementation presents a closely related educational model with microprogrammed control. Taken together, they provide a clear introduction to instruction-level sequencing and HDL-based CPU construction.',
+    tech:        ['SystemVerilog', 'microcode', 'RISC-V'],
+    github:      'singlecycle',
+    demo:        null,
+    slideshowInterval: 3000,
+    media: [
+		// Add images and/or videos here, e.g.:
+		{ type: 'image', src: '/images/SingleCycle/im1.png' },
     ],
   },
 ];
@@ -282,10 +385,10 @@ function ProjectCard({ proj, isExpanded, onToggle }) {
 
   return (
     <article
-      className={`bg-white rounded-2xl overflow-hidden border transition-shadow duration-200
+      className={`bg-white rounded-lg overflow-hidden border transition-all duration-200
         ${isExpanded
-          ? 'md:col-span-2 border-signal/40 shadow-[0_4px_32px_0_rgba(46,125,200,0.13)]'
-          : 'border-gray-100 hover:shadow-[0_4px_24px_0_rgba(10,22,40,0.10)]'}`}
+          ? 'md:col-span-2 border-signal/40 shadow-[0_16px_48px_rgba(46,125,200,0.16)]'
+          : 'border-gray-100 shadow-sm hover:-translate-y-0.5 hover:border-signal/30 hover:shadow-[0_14px_34px_rgba(10,22,40,0.10)]'}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -486,46 +589,70 @@ function ProjectCard({ proj, isExpanded, onToggle }) {
 
 function HeroSection() {
   return (
-    <section id="home" className="pt-[88px] pb-16 bg-white">
+    <section id="home" className="bg-white pt-[96px] pb-16 sm:pb-20">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
-          <div className="flex-shrink-0">
-            <div className="w-36 h-36 rounded-2xl bg-blueprint border-2 border-signal/20
-                            flex items-center justify-center overflow-hidden">
+        <div className="grid items-center gap-8 md:grid-cols-[0.88fr_1.12fr]">
+          <div className="relative overflow-hidden rounded-lg border border-gray-100 bg-blueprint p-3 shadow-sm dark:border-white/10 dark:bg-white/6">
+            <div className="aspect-[4/5] overflow-hidden rounded-md bg-lab">
               <img
                 src="/images/profile.jpg"
                 alt="Ali Saber"
-                className="object-cover w-full h-full"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <h1 className="font-display text-3xl font-bold tracking-tight text-deep-space">
-              {PROFILE.name}
-            </h1>
-            <div className="flex flex-col gap-2">
-              <span className="inline-flex items-center gap-2 text-slate-mid text-sm">
-                <BookOpen size={15} className="text-signal flex-shrink-0" />
-                {PROFILE.degree} · {PROFILE.university}
+
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap gap-2 text-xs font-medium text-circuit dark:text-sky-200">
+              <span className="rounded-full border border-signal/20 bg-blueprint px-3 py-1 dark:bg-signal/12">
+			    {ABOUT.area1}
               </span>
-              <a href={`mailto:${PROFILE.email}`}
-                 className="inline-flex items-center gap-2 text-slate-mid text-sm hover:text-signal transition-colors group">
-                <Mail size={15} className="text-signal flex-shrink-0" />
-                <span className="group-hover:underline underline-offset-2">{PROFILE.email}</span>
-              </a>
-              <span className="inline-flex items-center gap-2 text-slate-mid text-sm">
-                <MapPin size={15} className="text-signal flex-shrink-0" />
+              <span className="rounded-full border border-signal/20 bg-blueprint px-3 py-1 dark:bg-signal/12">
+			    {ABOUT.area2}
+              </span>
+              <span className="rounded-full border border-signal/20 bg-blueprint px-3 py-1 dark:bg-signal/12">
+			    {ABOUT.area3}
+              </span>
+            </div>
+
+            <div>
+              <h1 className="font-display text-4xl font-bold tracking-tight text-deep-space sm:text-5xl">
+                {PROFILE.name}
+              </h1>
+              <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-mid">
+			    {ABOUT.about}
+              </p>
+            </div>
+
+            <div className="grid gap-3 text-sm sm:grid-cols-1">
+              <span className="inline-flex items-center gap-2 text-slate-mid">
+                <BookOpen size={16} className="flex-shrink-0 text-signal" />
+                {PROFILE.degree}
+              </span>
+              <span className="inline-flex items-center gap-2 text-slate-mid">
+                <MapPin size={16} className="flex-shrink-0 text-signal" />
                 {PROFILE.location}
               </span>
-              <a href={PROFILE.scholarUrl} target="_blank" rel="noopener noreferrer"
-                 className="inline-flex items-center gap-2 text-slate-mid text-sm hover:text-signal transition-colors group">
-                <ExternalLink size={15} className="text-signal flex-shrink-0" />
-                <span className="group-hover:underline underline-offset-2">Google Scholar</span>
+              <a href={`mailto:${PROFILE.email}`}
+                 className="inline-flex items-center gap-2 text-slate-mid transition-colors hover:text-signal">
+                <Mail size={16} className="flex-shrink-0 text-signal" />
+                {PROFILE.email}
               </a>
+              <a href={PROFILE.scholarUrl} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 text-slate-mid transition-colors hover:text-signal">
+                <ExternalLink size={16} className="flex-shrink-0 text-signal" />
+                Google Scholar
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-3 pt-1">
               <a href={PROFILE.githubUrl} target="_blank" rel="noopener noreferrer"
-                 className="inline-flex items-center gap-2 text-slate-mid text-sm hover:text-signal transition-colors group">
-                <Github size={15} className="text-signal flex-shrink-0" />
-                <span className="group-hover:underline underline-offset-2">GitHub</span>
+                 className="inline-flex items-center gap-2 rounded-lg bg-deep-space px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-circuit">
+                <Github size={16} /> GitHub
+              </a>
+              <a href={PROFILE.linkedinUrl} target="_blank" rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-slate-mid transition-colors hover:border-signal/50 hover:text-circuit dark:border-white/10 dark:bg-white/6 dark:hover:text-sky-100">
+                <Linkedin size={16} /> LinkedIn
               </a>
             </div>
           </div>
@@ -535,13 +662,13 @@ function HeroSection() {
   );
 }
 
-// ─── Section: About ───────────────────────────────────────────────────────────
+// --- Section: About ───────────────────────────────────────────────────────────
 
 function AboutSection() {
   return (
-    <section className="py-14 bg-lab">
+    <section className="bg-lab py-16">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="max-w-2xl">
+        <div className="rounded-lg border border-gray-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5 sm:p-8">
           <p className="font-display font-semibold text-lg text-deep-space mb-1">
             {PROFILE.name}
           </p>
@@ -557,7 +684,7 @@ function AboutSection() {
   );
 }
 
-// ─── Section: Publications ───────────────────────────────────────────────────
+// --- Section: Publications ───────────────────────────────────────────────────
 
 function PublicationsSection() {
   return (
@@ -568,10 +695,10 @@ function PublicationsSection() {
           {PUBLICATIONS.map((pub) => (
             <li
               key={pub.id}
-              className="flex items-start gap-4 p-4 rounded-xl
-                         border border-gray-100 hover:border-signal/40
-                         hover:shadow-[0_2px_16px_0_rgba(46,125,200,0.08)]
-                         transition-all duration-200"
+              className="flex items-start gap-4 p-4 rounded-lg
+                         border border-gray-100 bg-white shadow-sm hover:-translate-y-0.5 hover:border-signal/40
+                         hover:shadow-[0_14px_34px_rgba(46,125,200,0.10)]
+                         transition-all duration-200 dark:border-white/10 dark:bg-white/5"
             >
               <div className="flex-shrink-0 w-[72px] h-[72px] rounded-lg
                               bg-blueprint border border-gray-200
@@ -657,9 +784,8 @@ function SkillsSection() {
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="px-3 py-1.5 text-sm rounded-full bg-lab
-                               text-slate-mid border border-gray-200
-                               hover:border-signal/50 hover:text-circuit transition-colors"
+                    className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-slate-mid transition-colors
+                               hover:border-signal/50 hover:text-circuit dark:border-white/10 dark:bg-white/5"
                   >
                     {item}
                   </span>
@@ -690,7 +816,7 @@ function ContactSection() {
         <ul className="flex flex-col gap-4 max-w-sm">
           {CONTACT_ITEMS.map(({ Icon, label, href }, i) => (
             <li key={i} className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-blueprint flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-blueprint flex items-center justify-center flex-shrink-0">
                 <Icon size={17} className="text-signal" />
               </div>
               {href ? (
@@ -718,11 +844,11 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer className="py-8 border-t border-gray-100 bg-white">
+    <footer className="border-t border-gray-100 bg-white py-8 dark:border-white/10">
       <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between
                       items-center gap-2 text-xs text-slate-mid/70">
         <span>© {new Date().getFullYear()} M. Ali Saber</span>
-        <span>Built with Next.js · Tehran University</span>
+        <span>Built with Ali Saber</span>
       </div>
     </footer>
   );

@@ -2,14 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+  --page-bg: #f5f7fa;
+  --page-surface: #ffffff;
+  --page-surface-muted: #f7f9fc;
+  --page-border: rgba(10, 22, 40, 0.08);
+  --page-shadow: 0 18px 50px rgba(10, 22, 40, 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --page-bg: #08111f;
+  --page-surface: #101b2d;
+  --page-surface-muted: #0b1424;
+  --page-border: rgba(255, 255, 255, 0.10);
+  --page-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(235, 243, 252, 0.72) 0%, rgba(245, 247, 250, 0) 24rem),
+    var(--page-bg);
+  color: #0a1628;
+}
+
+::selection {
+  background: rgba(46, 125, 200, 0.22);
+  color: #0a1628;
+}
+
+.dark body {
+  background:
+    linear-gradient(180deg, rgba(46, 125, 200, 0.16) 0%, rgba(8, 17, 31, 0) 28rem),
+    var(--page-bg);
+  color: #eaf3ff;
+}
+
+.dark ::selection {
+  background: rgba(125, 211, 252, 0.28);
+  color: #eff6ff;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(46, 125, 200, 0.45) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(46, 125, 200, 0.42);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+.dark .bg-white { background-color: var(--page-surface) !important; }
+.dark .bg-lab { background-color: #08111f !important; }
+.dark .bg-blueprint { background-color: rgba(46, 125, 200, 0.12) !important; }
+.dark .bg-deep-space { background-color: #e5f2ff !important; }
+.dark .bg-signal { background-color: #60a5fa !important; }
+
+.dark .text-deep-space { color: #eaf3ff !important; }
+.dark .text-slate-mid { color: #a7b4c7 !important; }
+.dark .text-circuit { color: #bfdbfe !important; }
+.dark .text-signal { color: #7dd3fc !important; }
+.dark a.bg-deep-space,
+.dark button.bg-deep-space { color: #08111f !important; }
+
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-deep-space\/8,
+.dark .border-deep-space\/10 {
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark .border-signal\/20,
+.dark .border-signal\/30,
+.dark .border-signal\/40,
+.dark .hover\:border-signal\/40:hover,
+.dark .hover\:border-signal\/50:hover {
+  border-color: rgba(125, 211, 252, 0.36) !important;
+}
+
+.dark .hover\:bg-lab:hover,
+.dark .hover\:bg-gray-100:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .hover\:text-deep-space:hover,
+.dark .hover\:text-circuit:hover,
+.dark .hover\:text-signal:hover {
+  color: #eaf3ff !important;
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.20) !important;
+}
+
+.dark img,
+.dark video {
+  filter: saturate(0.96) contrast(1.02);
 }
 
 /* Circuit trace animation for section headings */
 @keyframes trace {
   from { width: 0; }
-  to   { width: 3rem; }
+  to { width: 3rem; }
 }
 
 .trace-line {
